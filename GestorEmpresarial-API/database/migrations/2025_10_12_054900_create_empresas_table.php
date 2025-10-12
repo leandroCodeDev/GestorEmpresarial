@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('empresas', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->string('cnpj');
+            $table->string('cnpj')->unique();
             $table->string('endereco');
             $table->timestamps();
         });
