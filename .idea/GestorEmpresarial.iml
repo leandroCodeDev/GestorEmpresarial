@@ -137,6 +137,8 @@
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/storage/app" />
+      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/storage/framework" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
