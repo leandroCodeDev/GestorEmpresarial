@@ -48,26 +48,7 @@
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/laravel/framework" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/laravel/serializable-closure" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/laravel/pint" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/object-reflector" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/recursion-context" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/cli-parser" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/object-enumerator" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/complexity" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/global-state" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/phpunit/php-text-template" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/environment" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/phpunit/php-file-iterator" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/comparator" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/phpunit/php-code-coverage" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/symfony/deprecation-contracts" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/code-unit" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/phpunit/php-invoker" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/exporter" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/diff" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/lines-of-code" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/phpunit/php-timer" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/version" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/type" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/symfony/polyfill-intl-idn" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/brick/math" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/symfony/polyfill-php83" />
@@ -76,9 +57,7 @@
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/symfony/polyfill-php84" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/filp/whoops" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/symfony/service-contracts" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/phpunit/phpunit" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/symfony/string" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/code-unit-reverse-lookup" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/symfony/var-dumper" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/symfony/mime" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/symfony/event-dispatcher" />
@@ -107,14 +86,12 @@
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/symfony/polyfill-mbstring" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/symfony/translation" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/voku/portable-ascii" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/staabm/side-effects-detector" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/mockery/mockery" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/vlucas/phpdotenv" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/nunomaduro/collision" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/nunomaduro/termwind" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/nikic/php-parser" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/hamcrest/hamcrest-php" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/myclabs/deep-copy" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/dflydev/dot-access-data" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/league/commonmark" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/league/uri" />
@@ -126,13 +103,58 @@
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/egulias/email-validator" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/ramsey/uuid" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/ramsey/collection" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/phar-io/manifest" />
-      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/phar-io/version" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/composer" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/brianium/paratest" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/fidry/cpu-core-counter" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/staabm/side-effects-detector" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/cli-parser" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/phpstan/phpdoc-parser" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/complexity" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/lines-of-code" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/ta-tikoma/phpunit-architecture-test" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/phpunit/php-invoker" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/pestphp/pest-plugin-profanity" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/pestphp/pest" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/pestphp/pest-plugin-arch" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/jean85/pretty-package-versions" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/pestphp/pest-plugin-mutate" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/pestphp/pest-plugin" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/pestphp/pest-plugin-laravel" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/pestphp/pest-plugin-faker" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/larastan/larastan" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/iamcal/sql-parser" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/phpstan/phpstan" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
+  <component name="PhpStan">
+    <PhpStan_settings>
+      <PhpStanConfiguration tool_path="$PROJECT_DIR$/GestorEmpresarial-API/vendor/bin/phpstan" />
+    </PhpStan_settings>
+  </component>
   <component name="PhpStanOptionsConfiguration">
     <option name="transferred" value="true" />
   </component>

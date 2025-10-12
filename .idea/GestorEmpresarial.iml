@@ -7,15 +7,18 @@
       <sourceFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
       <sourceFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/tests" isTestSource="true" packagePrefix="Tests\" />
+      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/brianium/paratest" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/carbonphp/carbon-doctrine-types" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/dflydev/dot-access-data" />
+      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/doctrine/deprecations" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/doctrine/inflector" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/doctrine/lexer" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/dragonmantank/cron-expression" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/egulias/email-validator" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/fakerphp/faker" />
+      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/fidry/cpu-core-counter" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/filp/whoops" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/fruitcake/php-cors" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/graham-campbell/result-type" />
@@ -24,6 +27,9 @@
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/guzzlehttp/psr7" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/guzzlehttp/uri-template" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/hamcrest/hamcrest-php" />
+      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/iamcal/sql-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/jean85/pretty-package-versions" />
+      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/larastan/larastan" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/laravel/framework" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/laravel/pail" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/laravel/pint" />
@@ -47,9 +53,21 @@
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/nikic/php-parser" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/nunomaduro/collision" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/nunomaduro/termwind" />
+      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/pestphp/pest" />
+      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/pestphp/pest-plugin" />
+      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/pestphp/pest-plugin-arch" />
+      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/pestphp/pest-plugin-faker" />
+      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/pestphp/pest-plugin-laravel" />
+      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/pestphp/pest-plugin-mutate" />
+      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/pestphp/pest-plugin-profanity" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/phar-io/manifest" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/phar-io/version" />
+      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/phpdocumentor/reflection-common" />
+      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/phpdocumentor/reflection-docblock" />
+      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/phpdocumentor/type-resolver" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/phpoption/phpoption" />
+      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/phpstan/phpdoc-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/phpstan/phpstan" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/phpunit/php-code-coverage" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/phpunit/php-file-iterator" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/phpunit/php-invoker" />
@@ -69,8 +87,6 @@
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/ramsey/collection" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/ramsey/uuid" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/sebastian/cli-parser" />
-      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/sebastian/code-unit" />
-      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/sebastian/code-unit-reverse-lookup" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/sebastian/comparator" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/sebastian/complexity" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/sebastian/diff" />
@@ -115,6 +131,7 @@
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/symfony/uid" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/symfony/var-dumper" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/symfony/yaml" />
+      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/ta-tikoma/phpunit-architecture-test" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/theseer/tokenizer" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/tijsverkoyen/css-to-inline-styles" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/vlucas/phpdotenv" />
