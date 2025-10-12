@@ -21,7 +21,7 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        return $this->serviceEmpresa->buscarTodos();
+        return response()->json($this->serviceEmpresa->buscarTodos());
     }
 
 
@@ -30,7 +30,7 @@ class EmpresaController extends Controller
      */
     public function store(StoreEmpresaRequest $request)
     {
-        return $this->serviceEmpresa->salvar($request);
+        return response()->json($this->serviceEmpresa->salvar($request),201);
     }
 
     /**
@@ -38,7 +38,7 @@ class EmpresaController extends Controller
      */
     public function show(int $empresaId)
     {
-        return $this->serviceEmpresa->buscarPorId($empresaId);
+        return response()->json($this->serviceEmpresa->buscarPorId($empresaId));
     }
 
 
@@ -47,7 +47,7 @@ class EmpresaController extends Controller
      */
     public function update(UpdateEmpresaRequest $request, int $empresaId)
     {
-        return $this->serviceEmpresa->atualizar($request, $empresaId);
+        return response()->json($this->serviceEmpresa->atualizar($request, $empresaId));
     }
 
     /**
@@ -56,5 +56,6 @@ class EmpresaController extends Controller
     public function destroy(int $empresaId)
     {
          $this->serviceEmpresa->remover($empresaId);
+         return response()->noContent();
     }
 }
