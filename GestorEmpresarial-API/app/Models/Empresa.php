@@ -21,11 +21,11 @@ class Empresa extends Model
 
     public function funcionarios(): BelongsToMany
     {
-        return $this->BelongsToMany(Funcionario::class);
+        return $this->BelongsToMany(Funcionario::class,'empresas_funcionarios');
     }
 
     public function clientes():BelongsToMany
     {
-        return $this->BelongsToMany(Cliente::class);
+        return $this->BelongsToMany(Cliente::class,'empresas_clientes');
     }
 }

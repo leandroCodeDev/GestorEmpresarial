@@ -37,6 +37,6 @@ class Cliente extends Model
 
     public function empresas(): BelongsToMany
     {
-        return $this->BelongsToMany(Empresa::class);
+        return $this->BelongsToMany(Empresa::class,'empresas_clientes');
     }
 }
