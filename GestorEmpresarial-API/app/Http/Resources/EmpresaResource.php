@@ -3,17 +3,24 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class EmpresaResource extends ResourceCollection
+class EmpresaResource extends JsonResource
 {
     /**
-     * Transform the resource collection into an array.
+     * Transform the resource into an array.
      *
-     * @return array<int|string, mixed>
+     * @return array<string, mixed>
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'nome' => $this->nome,
+            'cnpj' => $this->cnpj,
+            'endereco' => $this->endereco,
+            'clientes' => new ClienteCollection($this->clientes),
+            'funcionarios' => new FuncionarioCollection($this->funcionarios),
+        ];
     }
 }
