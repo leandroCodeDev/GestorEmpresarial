@@ -4,63 +4,64 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreClienteRequest;
 use App\Http\Requests\UpdateClienteRequest;
-use App\Models\Cliente;
+use App\Http\Requests\UploadedDocumentoRequest;
+use App\Services\ClienteService;
 
 class ClienteController extends Controller
 {
+    public function __construct(
+        public ClienteService $clienteService
+    )
+    {
+    }
+
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return response()->json($this->clienteService->buscarTodos(), 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreClienteRequest $request)
     {
-        //
+        return response()->json($this->clienteService->criar($request), 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Cliente $cliente)
+    public function show(int $clienteId)
     {
-        //
+        return response()->json($this->clienteService->buscarPorId($clienteId), 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Cliente $cliente)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateClienteRequest $request, Cliente $cliente)
+    public function update(UpdateClienteRequest $request, int $clienteId)
     {
-        //
+        return response()->json($this->clienteService->atualizar($request,$clienteId), 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cliente $cliente)
+    public function destroy(int $clienteId)
     {
-        //
+        $this->clienteService->excluir($clienteId);
+        return response()->noContent();
+    }
+
+
+    public function enviarDocumento(UploadedDocumentoRequest $request, int $clienteId)
+    {
+        return response()->json($this->clienteService->enviarDocumento($request,$clienteId),201);
     }
 }

@@ -14,6 +14,7 @@ class ClienteResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+
         return [
             'id' => $this->id,
             'nome' => $this->nome,
@@ -21,8 +22,8 @@ class ClienteResource extends JsonResource
             'cpf' => $this->cpf,
             'email' => $this->email,
             'endereco' => $this->endereco,
-            'documento' => $this->documento,
-            'empresas' => EmpresaCollection::make($this->whenLoaded('empresas')),
+            'documento' => asset('storage/'.$this->documento_path),
+            'empresas' => new EmpresaCollection($this->whenLoaded('empresas')),
         ];
     }
 }

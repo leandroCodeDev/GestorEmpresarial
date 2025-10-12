@@ -11,7 +11,7 @@ class UpdateClienteRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,14 @@ class UpdateClienteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nome' => 'required|string',
+            'login' => 'required|alpha_dash:ascii|unique:clientes,login,'.$this->cliente.',id',
+            'cpf' => 'required|string|unique:clientes,cpf,'.$this->cliente.',id',
+            'email' => 'required|email|unique:clientes,email,'.$this->cliente.',id',
+            'senha' => 'required|string|min:6',
+            'endereco' => 'required|string',
+            'empresas' => 'required|array|min:1',
+            'empresas.*' => 'integer|exists:empresas,id',
         ];
     }
 }
