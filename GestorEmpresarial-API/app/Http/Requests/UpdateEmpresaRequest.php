@@ -11,7 +11,7 @@ class UpdateEmpresaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdateEmpresaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nome' => 'nullable|string',
+            'cnpj' => 'nullable|string',
+            'endereco' => 'nullable|string'
         ];
     }
 }
