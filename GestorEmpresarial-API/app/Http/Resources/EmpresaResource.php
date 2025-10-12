@@ -19,8 +19,8 @@ class EmpresaResource extends JsonResource
             'nome' => $this->nome,
             'cnpj' => $this->cnpj,
             'endereco' => $this->endereco,
-            'clientes' => new ClienteCollection($this->clientes),
-            'funcionarios' => new FuncionarioCollection($this->funcionarios),
+            'clientes' => new ClienteCollection($this->whenLoaded('clientes')),
+            'funcionarios' => new FuncionarioCollection($this->whenLoaded('funcionarios')),
         ];
     }
 }

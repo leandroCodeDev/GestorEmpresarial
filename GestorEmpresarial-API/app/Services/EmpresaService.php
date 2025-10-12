@@ -13,18 +13,18 @@ class EmpresaService {
 
     public function buscarTodos()
     {
-        $empresas = Empresa::all();
+        $empresas = Empresa::with('funcionarios')->with('clientes')->get();
         return new EmpresaCollection($empresas);
     }
 
     public function buscarPorId(int $id){
-        $empresa = Empresa::find($id);
+        $empresa = Empresa::with('funcionarios')->with('clientes')->find($id);
         return new EmpresaResource($empresa);
     }
 
     public function atualizar(UpdateEmpresaRequest $request, int $id)
     {
-        $empresa = Empresa::find($id);
+        $empresa = Empresa::with('funcionarios')->with('clientes')->find($id);
         $empresa->update($request->validated());
         return new EmpresaResource($empresa);
     }
