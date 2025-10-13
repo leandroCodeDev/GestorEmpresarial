@@ -1,15 +1,8 @@
 <?php
 
-use App\Http\Requests\StoreFuncionarioRequest;
-use App\Http\Requests\UpdateFuncionarioRequest;
-use App\Http\Requests\UploadedDocumentoRequest;
-use App\Http\Resources\FuncionarioCollection;
-use App\Http\Resources\FuncionarioResource;
 use App\Models\Empresa;
 use App\Models\Funcionario;
-use App\Services\FuncionarioService;
 use Illuminate\Http\UploadedFile;
-
 
 it('retorna a lista de funcionarios', function () {
     $funcionarios = Funcionario::factory()->count(5)->create();
@@ -39,7 +32,6 @@ it('cria um novo funcionario', closure: function () {
     $funcionario->documento_path = $file;
     $funcionario->login = 'funcionario Criado';
 
-
     $response = $this->post('/api/funcionarios', [
         'nome' => $funcionario->nome,
         'login' => $funcionario->login,
@@ -48,9 +40,8 @@ it('cria um novo funcionario', closure: function () {
         'senha' => $funcionario->senha,
         'endereco' => $funcionario->endereco,
         'documento' => $file,
-        'empresas' => [$empresa->id]
+        'empresas' => [$empresa->id],
     ]);
-
 
     $response->assertCreated()
         ->assertJsonFragment(['nome' => $funcionario->nome])
@@ -67,7 +58,6 @@ it('atualiza um funcionario existente', function () {
 
     $funcionario->login = 'funcionario atualizado';
 
-
     $response = $this->putJson('/api/funcionarios/'.$funcionario->id, [
         'nome' => $funcionario->nome,
         'login' => $funcionario->login,
@@ -75,7 +65,7 @@ it('atualiza um funcionario existente', function () {
         'email' => $funcionario->email,
         'senha' => $funcionario->senha,
         'endereco' => $funcionario->endereco,
-        'empresas' => [$empresa->id]
+        'empresas' => [$empresa->id],
     ]);
 
     $response->assertOk()
@@ -100,15 +90,12 @@ it('envia um documento para o funcionario', function () {
     $funcionario = Funcionario::get()->first();
     $funcionario->documento_path = $file;
 
-
     $response = $this->post('/api/funcionarios/'.$funcionario->id.'/documento', [
         'documento' => $file,
     ]);
 
-
-
     $response->assertCreated()
         ->assertJsonFragment([
-            'documento' => asset('storage/funcionarios/'.$file->hashName())
+            'documento' => asset('storage/funcionarios/'.$file->hashName()),
         ]);
 });

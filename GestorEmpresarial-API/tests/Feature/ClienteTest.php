@@ -1,23 +1,11 @@
 <?php
 
-use App\Http\Requests\StoreClienteRequest;
-use App\Http\Requests\UpdateClienteRequest;
-use App\Http\Requests\UploadedDocumentoRequest;
-use App\Http\Resources\ClienteCollection;
-use App\Http\Resources\ClienteResource;
 use App\Models\Cliente;
 use App\Models\Empresa;
-use App\Services\ClienteService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
-
-
-
 
 it('retorna a lista de clientes', function () {
     $clientes = Cliente::factory()->count(5)->create();
-
-
 
     $response = $this->getJson('/api/clientes');
 
@@ -45,7 +33,6 @@ it('cria um novo cliente', closure: function () {
     $cliente->documento_path = $file;
     $cliente->login = 'clienteCriado';
 
-
     $response = $this->post('/api/clientes', [
         'nome' => $cliente->nome,
         'login' => $cliente->login,
@@ -54,9 +41,8 @@ it('cria um novo cliente', closure: function () {
         'senha' => $cliente->senha,
         'endereco' => $cliente->endereco,
         'documento' => $file,
-        'empresas' => [$empresa->id]
+        'empresas' => [$empresa->id],
     ]);
-
 
     $response->assertCreated()
         ->assertJsonFragment(['nome' => $cliente->nome])
@@ -73,7 +59,6 @@ it('atualiza um cliente existente', function () {
 
     $cliente->login = 'cliente atualizado';
 
-
     $response = $this->putJson('/api/clientes/'.$cliente->id, [
         'nome' => $cliente->nome,
         'login' => $cliente->login,
@@ -81,7 +66,7 @@ it('atualiza um cliente existente', function () {
         'email' => $cliente->email,
         'senha' => $cliente->senha,
         'endereco' => $cliente->endereco,
-        'empresas' => [$empresa->id]
+        'empresas' => [$empresa->id],
     ]);
 
     $response->assertOk()
@@ -106,15 +91,12 @@ it('envia um documento para o cliente', function () {
     $cliente = Cliente::get()->first();
     $cliente->documento_path = $file;
 
-
     $response = $this->post('/api/clientes/'.$cliente->id.'/documento', [
         'documento' => $file,
     ]);
 
-
-
     $response->assertCreated()
         ->assertJsonFragment([
-            'documento' => asset('storage/clientes/'.$file->hashName())
+            'documento' => asset('storage/clientes/'.$file->hashName()),
         ]);
 });

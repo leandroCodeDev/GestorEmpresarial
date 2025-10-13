@@ -1,19 +1,8 @@
 <?php
 
-use App\Http\Requests\UpdateEmpresaRequest;
-use App\Http\Resources\EmpresaCollection;
-use App\Http\Resources\EmpresaResource;
 use App\Models\Empresa;
-use App\Services\EmpresaService;
 use Database\Seeders\EmpresaSeeder;
-use Illuminate\Testing\TestResponse;
 use Mockery;
-use function Pest\Laravel\getJson;
-use function Pest\Laravel\postJson;
-use function Pest\Laravel\putJson;
-use function Pest\Laravel\deleteJson;
-
-
 
 afterEach(function () {
     Mockery::close();
@@ -34,7 +23,6 @@ it('retorna uma empresa específica', function () {
 
     $response = $this->get('/api/empresas/'.$empresa->id);
 
-
     $response->assertOk()
         ->assertJsonFragment(['nome' => $empresa->nome])
         ->assertJsonFragment(['cnpj' => $empresa->cnpj]);
@@ -47,9 +35,9 @@ it('cria uma nova empresa', function () {
     $empresaCriada = $dados;
 
     $response = $this->post('/api/empresas', [
-        "nome" => $dados->nome,
-        "cnpj" => $dados->cnpj,
-        "endereco" => $dados->endereco
+        'nome' => $dados->nome,
+        'cnpj' => $dados->cnpj,
+        'endereco' => $dados->endereco,
     ]);
 
     $response->assertCreated()
@@ -66,7 +54,7 @@ it('atualiza uma empresa existente', function () {
     $response = $this->put('/api/empresas/'.$empresa->id, [
         'nome' => $empresa->nome,
         'cnpj' => $empresa->cnpj,
-        'endereco' => $empresa->endereco
+        'endereco' => $empresa->endereco,
     ]);
 
     $response->assertOk()
