@@ -139,6 +139,7 @@
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/webmozart/assert" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/storage/app" />
       <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/storage/framework" />
+      <excludeFolder url="file://$MODULE_DIR$/GestorEmpresarial-API/vendor/laravel/sanctum" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

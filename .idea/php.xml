@@ -147,6 +147,7 @@
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/larastan/larastan" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/iamcal/sql-parser" />
       <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/phpstan/phpstan" />
+      <path value="$PROJECT_DIR$/GestorEmpresarial-API/vendor/laravel/sanctum" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

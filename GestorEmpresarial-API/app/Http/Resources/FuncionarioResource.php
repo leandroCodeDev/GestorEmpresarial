@@ -14,6 +14,15 @@ class FuncionarioResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'nome' => $this->nome,
+            'login' => $this->login,
+            'cpf' => $this->cpf,
+            'email' => $this->email,
+            'endereco' => $this->endereco,
+            'documento' => asset('storage/'.$this->documento_path),
+            'empresas' => new EmpresaCollection($this->whenLoaded('empresas')),
+        ];
     }
 }

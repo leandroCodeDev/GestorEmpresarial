@@ -11,7 +11,7 @@ class StoreFuncionarioRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,15 @@ class StoreFuncionarioRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nome' => 'required|string',
+            'login' => 'required|alpha_dash:ascii|unique:funcionarios,login',
+            'cpf' => 'required|string|unique:funcionarios,cpf',
+            'email' => 'required|email|unique:funcionarios,email',
+            'senha' => 'required|string|min:6',
+            'endereco' => 'required|string',
+            'documento' => 'required|file|mimes:pdf,jpg|max:20048',
+            'empresas' => 'required|array|min:1',
+            'empresas.*' => 'integer|exists:empresas,id',
         ];
     }
 }
