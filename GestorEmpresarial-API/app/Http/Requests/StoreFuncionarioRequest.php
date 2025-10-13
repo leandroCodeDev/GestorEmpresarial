@@ -23,7 +23,7 @@ class StoreFuncionarioRequest extends FormRequest
     {
         return [
             'nome' => 'required|string',
-            'login' => 'required|alpha_dash:ascii|unique:funcionarios,login',
+            'login' => 'required|string|ascii|unique:funcionarios,login',
             'cpf' => 'required|string|unique:funcionarios,cpf',
             'email' => 'required|email|unique:funcionarios,email',
             'senha' => 'required|string|min:6',

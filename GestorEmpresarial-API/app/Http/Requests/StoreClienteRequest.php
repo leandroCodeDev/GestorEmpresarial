@@ -23,7 +23,7 @@ class StoreClienteRequest extends FormRequest
     {
         return [
             'nome' => 'required|string',
-            'login' => 'required|alpha_dash:ascii|unique:clientes,login',
+            'login' => 'required|string|ascii|unique:funcionarios,login',
             'cpf' => 'required|string|unique:clientes,cpf',
             'email' => 'required|email|unique:clientes,email',
             'senha' => 'required|string|min:6',

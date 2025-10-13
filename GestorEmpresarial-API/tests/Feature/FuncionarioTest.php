@@ -10,51 +10,25 @@ use App\Models\Funcionario;
 use App\Services\FuncionarioService;
 use Illuminate\Http\UploadedFile;
 
-beforeEach(function () {
-    // Cria mock do service
-    $this->mockService = Mockery::mock(FuncionarioService::class);
-    $this->app->instance(FuncionarioService::class, $this->mockService);
-});
-
-afterEach(function () {
-    Mockery::close();
-});
 
 it('retorna a lista de funcionarios', function () {
-    $funcionarios = Funcionario::factory()->count(5)->make();
-    $funcionariosResource = new FuncionarioCollection($funcionarios);
-
-    $this->mockService
-        ->shouldReceive('buscarTodos')
-        ->once()
-        ->andReturn($funcionariosResource);
-
-    $response = $this->getJson('/api/funcionarios');
+    $funcionarios = Funcionario::factory()->count(5)->create();
+    $response = $this->get('/api/funcionarios');
 
     $response->assertOk()
         ->assertJsonCount($funcionarios->count());
 });
 
 it('retorna um funcionario específico', function () {
-    Storage::fake('local');
-    $file = UploadedFile::fake()->create('comprovante.pdf', 200, 'application/pdf');
-    $funcionario = Funcionario::factory()->make();
-    $funcionario->documento_path = $file;
-    $funcionariosResource = new FuncionarioResource($funcionario);
+    Funcionario::factory()->create();
+    $funcionario = Funcionario::get()->first();
 
-    $this->mockService
-        ->shouldReceive('buscarPorId')
-        ->with(10)
-        ->once()
-        ->andReturn($funcionariosResource);
+    $response = $this->get('/api/funcionarios/'.$funcionario->id);
 
-    $response = $this->get('/api/funcionarios/10');
-
-
-    $funcionarioArray = $funcionario->toArray();
-    unset($funcionarioArray['senha']);
     $response->assertOk()
-        ->assertJsonFragment($funcionarioArray);
+        ->assertJsonFragment(['nome' => $funcionario->nome])
+        ->assertJsonFragment(['cpf' => $funcionario->cpf])
+        ->assertJsonFragment(['endereco' => $funcionario->endereco]);
 });
 
 it('cria um novo funcionario', closure: function () {
@@ -63,14 +37,8 @@ it('cria um novo funcionario', closure: function () {
     $file = UploadedFile::fake()->create('comprovante.pdf', 200, 'application/pdf');
     $funcionario = Funcionario::factory()->make();
     $funcionario->documento_path = $file;
-    $funcionario->login = 'funcionarioCriado';
-    $funcionariosResource = new FuncionarioResource($funcionario);
+    $funcionario->login = 'funcionario Criado';
 
-    $this->mockService
-        ->shouldReceive('criar')
-        ->with(Mockery::type(StoreFuncionarioRequest::class))
-        ->once()
-        ->andReturn($funcionariosResource);
 
     $response = $this->post('/api/funcionarios', [
         'nome' => $funcionario->nome,
@@ -83,30 +51,24 @@ it('cria um novo funcionario', closure: function () {
         'empresas' => [$empresa->id]
     ]);
 
-    $funcionarioArray = $funcionario->toArray();
-    unset($funcionarioArray['senha']);
-    $funcionarioArray['documento'] =  asset('storage/'.$file);
+
     $response->assertCreated()
-        ->assertJsonFragment($funcionarioArray);
+        ->assertJsonFragment(['nome' => $funcionario->nome])
+        ->assertJsonFragment(['cpf' => $funcionario->cpf])
+        ->assertJsonFragment(['endereco' => $funcionario->endereco]);
 });
 
 it('atualiza um funcionario existente', function () {
-    $empresa = Empresa::factory()->create();
+    Empresa::factory()->create();
+    Funcionario::factory()->create();
+    $empresa = Empresa::get()->first();
+    $funcionario = Funcionario::get()->first();
     Storage::fake('local');
-    $file = UploadedFile::fake()->create('comprovante.pdf', 200, 'application/pdf');
-    $funcionario = Funcionario::factory()->make();
-    $funcionario->login = 'funcionarioAlterado';
-    $funcionario->documento_path = $file;
 
-    $funcionariosResource = new FuncionarioResource($funcionario);
+    $funcionario->login = 'funcionario atualizado';
 
-    $this->mockService
-        ->shouldReceive('atualizar')
-        ->with(Mockery::type(UpdateFuncionarioRequest::class), 5)
-        ->once()
-        ->andReturn($funcionariosResource);
 
-    $response = $this->putJson('/api/funcionarios/5', [
+    $response = $this->putJson('/api/funcionarios/'.$funcionario->id, [
         'nome' => $funcionario->nome,
         'login' => $funcionario->login,
         'cpf' => $funcionario->cpf,
@@ -116,21 +78,17 @@ it('atualiza um funcionario existente', function () {
         'empresas' => [$empresa->id]
     ]);
 
-    $funcionarioArray = $funcionario->toArray();
-    unset($funcionarioArray['senha']);
-    $funcionarioArray['documento'] =  asset('storage/'.$file);
     $response->assertOk()
-        ->assertJsonFragment($funcionarioArray);
+        ->assertJsonFragment(['nome' => $funcionario->nome])
+        ->assertJsonFragment(['cpf' => $funcionario->cpf])
+        ->assertJsonFragment(['endereco' => $funcionario->endereco]);
 });
 
 it('remove um funcionario', function () {
-    $this->mockService
-        ->shouldReceive('excluir')
-        ->with(5)
-        ->once()
-        ->andReturnTrue();
+    Funcionario::factory()->create();
+    $funcionario = Funcionario::get()->first();
 
-    $response = $this->deleteJson('/api/funcionarios/5');
+    $response = $this->deleteJson('/api/funcionarios/'.$funcionario->id);
 
     $response->assertNoContent();
 });
@@ -138,24 +96,19 @@ it('remove um funcionario', function () {
 it('envia um documento para o funcionario', function () {
     Storage::fake('local');
     $file = UploadedFile::fake()->create('comprovante.pdf', 200, 'application/pdf');
-    $funcionario = Funcionario::factory()->make();
+    Funcionario::factory()->create();
+    $funcionario = Funcionario::get()->first();
     $funcionario->documento_path = $file;
 
-    $funcionariosResource = new FuncionarioResource($funcionario);
 
-    $this->mockService
-        ->shouldReceive('enviarDocumento')
-        ->with(Mockery::type(UploadedDocumentoRequest::class), 5)
-        ->once()
-        ->andReturn($funcionariosResource);
-
-    $response = $this->post('/api/funcionarios/5/documento', [
+    $response = $this->post('/api/funcionarios/'.$funcionario->id.'/documento', [
         'documento' => $file,
     ]);
 
-    $funcionarioArray = $funcionario->toArray();
-    unset($funcionarioArray['senha']);
-    $funcionarioArray['documento'] =  asset('storage/'.$file);
+
+
     $response->assertCreated()
-        ->assertJsonFragment($funcionarioArray);
+        ->assertJsonFragment([
+            'documento' => asset('storage/funcionarios/'.$file->hashName())
+        ]);
 });

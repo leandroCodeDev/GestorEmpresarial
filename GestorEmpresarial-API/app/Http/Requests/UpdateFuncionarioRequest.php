@@ -23,7 +23,7 @@ class UpdateFuncionarioRequest extends FormRequest
     {
         return [
             'nome' => 'required|string',
-            'login' => 'required|alpha_dash:ascii|unique:funcionarios,login,'.$this->funcionario.',id',
+            'login' => 'required|string|ascii|unique:funcionarios,login,'.$this->funcionario.',id',
             'cpf' => 'required|string|unique:funcionarios,cpf,'.$this->funcionario.',id',
             'email' => 'required|email|unique:funcionarios,email,'.$this->funcionario.',id',
             'senha' => 'required|string|min:6',

@@ -12,24 +12,12 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 
 
-beforeEach(function () {
-    // Cria mock do service
-    $this->mockService = Mockery::mock(ClienteService::class);
-    $this->app->instance(ClienteService::class, $this->mockService);
-});
 
-afterEach(function () {
-    Mockery::close();
-});
 
 it('retorna a lista de clientes', function () {
-    $clientes = Cliente::factory()->count(5)->make();
-    $clientesResource = new ClienteCollection($clientes);
+    $clientes = Cliente::factory()->count(5)->create();
 
-    $this->mockService
-        ->shouldReceive('buscarTodos')
-        ->once()
-        ->andReturn($clientesResource);
+
 
     $response = $this->getJson('/api/clientes');
 
@@ -38,25 +26,15 @@ it('retorna a lista de clientes', function () {
 });
 
 it('retorna um cliente específico', function () {
-    Storage::fake('local');
-    $file = UploadedFile::fake()->create('comprovante.pdf', 200, 'application/pdf');
-    $cliente = Cliente::factory()->make();
-    $cliente->documento_path = $file;
-    $clientesResource = new ClienteResource($cliente);
+    Cliente::factory()->create();
+    $cliente = Cliente::get()->first();
 
-    $this->mockService
-        ->shouldReceive('buscarPorId')
-        ->with(10)
-        ->once()
-        ->andReturn($clientesResource);
+    $response = $this->get('/api/clientes/'.$cliente->id);
 
-    $response = $this->get('/api/clientes/10');
-
-
-    $clienteArray = $cliente->toArray();
-    unset($clienteArray['senha']);
     $response->assertOk()
-        ->assertJsonFragment($clienteArray);
+        ->assertJsonFragment(['nome' => $cliente->nome])
+        ->assertJsonFragment(['cpf' => $cliente->cpf])
+        ->assertJsonFragment(['endereco' => $cliente->endereco]);
 });
 
 it('cria um novo cliente', closure: function () {
@@ -67,14 +45,6 @@ it('cria um novo cliente', closure: function () {
     $cliente->documento_path = $file;
     $cliente->login = 'clienteCriado';
 
-
-    $clientesResource = new ClienteResource($cliente);
-
-    $this->mockService
-        ->shouldReceive('criar')
-        ->with(Mockery::type(StoreClienteRequest::class))
-        ->once()
-        ->andReturn($clientesResource);
 
     $response = $this->post('/api/clientes', [
         'nome' => $cliente->nome,
@@ -87,30 +57,24 @@ it('cria um novo cliente', closure: function () {
         'empresas' => [$empresa->id]
     ]);
 
-    $clienteArray = $cliente->toArray();
-    unset($clienteArray['senha']);
-    $clienteArray['documento'] =  asset('storage/'.$file);
+
     $response->assertCreated()
-        ->assertJsonFragment($clienteArray);
+        ->assertJsonFragment(['nome' => $cliente->nome])
+        ->assertJsonFragment(['cpf' => $cliente->cpf])
+        ->assertJsonFragment(['endereco' => $cliente->endereco]);
 });
 
 it('atualiza um cliente existente', function () {
-    $empresa = Empresa::factory()->create();
+    Empresa::factory()->create();
+    Cliente::factory()->create();
+    $empresa = Empresa::get()->first();
+    $cliente = Cliente::get()->first();
     Storage::fake('local');
-    $file = UploadedFile::fake()->create('comprovante.pdf', 200, 'application/pdf');
-    $cliente = Cliente::factory()->make();
-    $cliente->login = 'clienteAlterado';
-    $cliente->documento_path = $file;
 
-    $clientesResource = new ClienteResource($cliente);
+    $cliente->login = 'cliente atualizado';
 
-    $this->mockService
-        ->shouldReceive('atualizar')
-        ->with(Mockery::type(UpdateClienteRequest::class), 5)
-        ->once()
-        ->andReturn($clientesResource);
 
-    $response = $this->putJson('/api/clientes/5', [
+    $response = $this->putJson('/api/clientes/'.$cliente->id, [
         'nome' => $cliente->nome,
         'login' => $cliente->login,
         'cpf' => $cliente->cpf,
@@ -120,21 +84,17 @@ it('atualiza um cliente existente', function () {
         'empresas' => [$empresa->id]
     ]);
 
-    $clienteArray = $cliente->toArray();
-    unset($clienteArray['senha']);
-    $clienteArray['documento'] =  asset('storage/'.$file);
     $response->assertOk()
-        ->assertJsonFragment($clienteArray);
+        ->assertJsonFragment(['nome' => $cliente->nome])
+        ->assertJsonFragment(['cpf' => $cliente->cpf])
+        ->assertJsonFragment(['endereco' => $cliente->endereco]);
 });
 
 it('remove um cliente', function () {
-    $this->mockService
-        ->shouldReceive('excluir')
-        ->with(5)
-        ->once()
-        ->andReturnTrue();
+    Cliente::factory()->create();
+    $cliente = Cliente::get()->first();
 
-    $response = $this->deleteJson('/api/clientes/5');
+    $response = $this->delete('/api/clientes/'.$cliente->id);
 
     $response->assertNoContent();
 });
@@ -142,24 +102,19 @@ it('remove um cliente', function () {
 it('envia um documento para o cliente', function () {
     Storage::fake('local');
     $file = UploadedFile::fake()->create('comprovante.pdf', 200, 'application/pdf');
-    $cliente = Cliente::factory()->make();
+    Cliente::factory()->create();
+    $cliente = Cliente::get()->first();
     $cliente->documento_path = $file;
 
-    $clientesResource = new ClienteResource($cliente);
 
-    $this->mockService
-        ->shouldReceive('enviarDocumento')
-        ->with(Mockery::type(UploadedDocumentoRequest::class), 5)
-        ->once()
-        ->andReturn($clientesResource);
-
-    $response = $this->post('/api/clientes/5/documento', [
+    $response = $this->post('/api/clientes/'.$cliente->id.'/documento', [
         'documento' => $file,
     ]);
 
-    $clienteArray = $cliente->toArray();
-    unset($clienteArray['senha']);
-    $clienteArray['documento'] =  asset('storage/'.$file);
+
+
     $response->assertCreated()
-        ->assertJsonFragment($clienteArray);
+        ->assertJsonFragment([
+            'documento' => asset('storage/clientes/'.$file->hashName())
+        ]);
 });
