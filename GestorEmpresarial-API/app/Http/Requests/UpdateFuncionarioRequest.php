@@ -21,15 +21,15 @@ class UpdateFuncionarioRequest extends FormRequest
      */
     public function rules(): array
     {
-         return [
-             'nome' => 'required|string',
-             'login' => 'required|alpha_dash:ascii|unique:funcionarios,login,'.$this->funcionario.',id',
-             'cpf' => 'required|string|unique:funcionarios,cpf,'.$this->funcionario.',id',
-             'email' => 'required|email|unique:funcionarios,email,'.$this->funcionario.',id',
-             'senha' => 'required|string|min:6',
-             'endereco' => 'required|string',
-             'empresas' => 'required|array|min:1',
-             'empresas.*' => 'integer|exists:empresas,id',
-         ];
+        return [
+            'nome' => 'required|string',
+            'login' => 'required|alpha_dash:ascii|unique:funcionarios,login,'.$this->funcionario.',id',
+            'cpf' => 'required|string|unique:funcionarios,cpf,'.$this->funcionario.',id',
+            'email' => 'required|email|unique:funcionarios,email,'.$this->funcionario.',id',
+            'senha' => 'required|string|min:6',
+            'endereco' => 'required|string',
+            'empresas' => 'required|array|min:1',
+            'empresas.*' => 'integer|exists:empresas,id',
+        ];
     }
 }

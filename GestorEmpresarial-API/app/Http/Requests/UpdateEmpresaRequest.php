@@ -24,7 +24,7 @@ class UpdateEmpresaRequest extends FormRequest
         return [
             'nome' => 'nullable|string',
             'cnpj' => 'nullable|string',
-            'endereco' => 'nullable|string'
+            'endereco' => 'nullable|string',
         ];
     }
 }

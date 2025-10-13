@@ -1,9 +1,8 @@
 <?php
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
-
 
 class UploadedDocumentoRequest extends FormRequest
 {
@@ -11,9 +10,9 @@ class UploadedDocumentoRequest extends FormRequest
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
-{
-    return true;
-}
+    {
+        return true;
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -21,9 +20,9 @@ class UploadedDocumentoRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-{
-    return [
-        'documento' => 'required|file|mimes:pdf,jpg|max:20048',
-    ];
-}
+    {
+        return [
+            'documento' => 'required|file|mimes:pdf,jpg|max:20048',
+        ];
+    }
 }

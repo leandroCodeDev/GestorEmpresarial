@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Funcionario;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -10,18 +11,20 @@ class FuncionarioResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
+     * @property Funcionario $resource
+     *
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'nome' => $this->nome,
-            'login' => $this->login,
-            'cpf' => $this->cpf,
-            'email' => $this->email,
-            'endereco' => $this->endereco,
-            'documento' => asset('storage/'.$this->documento_path),
+            'id' => $this->resource->id,
+            'nome' => $this->resource->nome,
+            'login' => $this->resource->login,
+            'cpf' => $this->resource->cpf,
+            'email' => $this->resource->email,
+            'endereco' => $this->resource->endereco,
+            'documento' => asset('storage/'.$this->resource->documento_path),
             'empresas' => new EmpresaCollection($this->whenLoaded('empresas')),
         ];
     }

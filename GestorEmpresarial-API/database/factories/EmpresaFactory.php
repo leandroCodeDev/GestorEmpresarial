@@ -18,7 +18,7 @@ class EmpresaFactory extends Factory
     {
         return [
             'nome' => $this->faker->company(),
-            'cnpj'=> $this->faker->unique()->numerify('###.###.###/####-##'),
+            'cnpj' => $this->faker->unique()->numerify('###.###.###/####-##'),
             'endereco' => $this->faker->address(),
         ];
     }

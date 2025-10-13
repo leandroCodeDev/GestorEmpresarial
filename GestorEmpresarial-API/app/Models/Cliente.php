@@ -4,9 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Cliente extends Model
 {
@@ -35,8 +33,16 @@ class Cliente extends Model
         ];
     }
 
+    /**
+     * @return BelongsToMany<Empresa,Cliente,EmpresaCliente>
+     */
     public function empresas(): BelongsToMany
     {
-        return $this->BelongsToMany(Empresa::class,'empresas_clientes');
+        /** @var BelongsToMany<Empresa,Cliente,EmpresaCliente> */
+        return $this->BelongsToMany(Empresa::class,
+            'empresas_clientes',
+            'cliente_id',
+            'empresa_id'
+        )->using(EmpresaCliente::class);
     }
 }

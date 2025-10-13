@@ -7,38 +7,43 @@ use App\Http\Requests\UpdateEmpresaRequest;
 use App\Http\Resources\EmpresaCollection;
 use App\Http\Resources\EmpresaResource;
 use App\Models\Empresa;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
-
-class EmpresaService {
-
-    public function buscarTodos()
+class EmpresaService
+{
+    public function buscarTodos(): ResourceCollection
     {
         $empresas = Empresa::with('funcionarios')->with('clientes')->get();
+
         return new EmpresaCollection($empresas);
     }
 
-    public function buscarPorId(int $id){
+    public function buscarPorId(int $id): JsonResource
+    {
         $empresa = Empresa::with('funcionarios')->with('clientes')->find($id);
+
         return new EmpresaResource($empresa);
     }
 
-    public function atualizar(UpdateEmpresaRequest $request, int $id)
+    public function atualizar(UpdateEmpresaRequest $request, int $id): JsonResource
     {
         $empresa = Empresa::with('funcionarios')->with('clientes')->find($id);
         $empresa->update($request->validated());
+
         return new EmpresaResource($empresa);
     }
 
-
-    public function salvar(StoreEmpresaRequest $request)
+    public function salvar(StoreEmpresaRequest $request): JsonResource
     {
 
         $empresa = new Empresa($request->validated());
         $empresa->save();
+
         return new EmpresaResource($empresa);
     }
 
-    public function remover(int $id)
+    public function remover(int $id): void
     {
         Empresa::destroy($id);
     }

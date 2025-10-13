@@ -4,9 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Empresa extends Model
 {
@@ -19,13 +17,31 @@ class Empresa extends Model
         'endereco',
     ];
 
+    /**
+     * @return BelongsToMany< Funcionario,Empresa, EmpresaFuncionario>
+     */
     public function funcionarios(): BelongsToMany
     {
-        return $this->BelongsToMany(Funcionario::class,'empresas_funcionarios');
+        /** @var BelongsToMany<Funcionario,Empresa, EmpresaFuncionario> */
+        return $this->BelongsToMany(
+            Funcionario::class,
+            'empresas_funcionarios',
+            'empresa_id',
+            'funcionario_id'
+        )->using(EmpresaFuncionario::class);
     }
 
-    public function clientes():BelongsToMany
+    /**
+     * @return BelongsToMany< Cliente,Empresa, EmpresaCliente>
+     */
+    public function clientes(): BelongsToMany
     {
-        return $this->BelongsToMany(Cliente::class,'empresas_clientes');
+        /** @var BelongsToMany< Cliente,Empresa, EmpresaCliente> */
+        return $this->BelongsToMany(
+            Cliente::class,
+            'empresas_clientes',
+            'empresa_id',
+            'cliente_id'
+        )->using(EmpresaCliente::class);
     }
 }
