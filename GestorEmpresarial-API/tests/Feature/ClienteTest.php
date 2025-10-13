@@ -65,6 +65,8 @@ it('cria um novo cliente', closure: function () {
     $file = UploadedFile::fake()->create('comprovante.pdf', 200, 'application/pdf');
     $cliente = Cliente::factory()->make();
     $cliente->documento_path = $file;
+    $cliente->login = 'clienteCriado';
+
 
     $clientesResource = new ClienteResource($cliente);
 
