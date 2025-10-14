@@ -1,6 +1,6 @@
 @use "../../../styles.scss" as Styles;
 
-.home {
+.cliente {
   background-color: Styles.$blue-100;
   padding: 3.2rem;
   min-height: 100vh;
@@ -19,23 +19,14 @@
 
 
 @media (max-width: 600px) {
-  .home {
+  .cliente {
     min-height: calc(100vh - 64px);
   }
 }
 
-@media (max-width: 560px) {
-  .home {
-    .busca-alunos {
-      .alunos {
-        grid-template-columns: 1fr;
-      }
-    }
-  }
-}
 
 @media (max-width: 768px) {
-  .home {
+  .cliente {
     min-height: calc(100vh - 64px);
     padding: 2rem;
     h2 {
