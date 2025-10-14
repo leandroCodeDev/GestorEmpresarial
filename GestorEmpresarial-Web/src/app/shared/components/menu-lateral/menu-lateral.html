@@ -1,0 +1,20 @@
+<div class="logo">
+  <img src="imagens/logo.png" alt="Gestão Empresarial" />
+</div>
+
+
+
+<mat-nav-list class="menu">
+  <a
+    mat-list-item
+    [routerLink]="[item.rota]"
+    *ngFor="let item of itensMenu"
+    (click)="closeSidenav()"
+  >
+
+    <mat-icon matListItemIcon>{{item.icone}}</mat-icon>
+
+    <span matListItemTitle>{{ item.rotulo }}</span>
+  </a>
+
+</mat-nav-list>
