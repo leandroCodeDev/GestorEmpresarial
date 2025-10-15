@@ -1,5 +1,197 @@
 <div class="cliente">
-  <h2>Cadastrar Cliente</h2>
-  
-  
+  <div class="titulo">
+    <h3>{{ !idCliente ? "Cadastro" : "Edição" }}</h3>
+    <div class="botoes">
+      <button
+        mat-flat-button
+        type="button"
+        [disabled]="!idCliente"
+        (click)="habilitarEdicao()"
+        class="bt-editar"
+      >
+        <mat-icon>edit</mat-icon>
+        Editar
+      </button>
+      <button
+        mat-flat-button
+        type="button"
+        [disabled]="!idCliente"
+        (click)="excluirCliente(formCliente.value)"
+        class="bt-excluir"
+      >
+        <mat-icon>delete</mat-icon>
+        Excluir
+      </button>
+    </div>
+  </div>
+  <form [formGroup]="formCliente" (ngSubmit)="submitForm()">
+    <div class="col-50">
+      <label for="nome">Nome</label>
+      <input type="text" name="nome" id="nome" formControlName="nome" />
+      <app-erro-form
+        [control]="formCliente.controls['nome']"
+        [customMessages]="{
+          required: 'Nome completo é obrigatório',
+        }"
+      ></app-erro-form>
+    </div>
+    <div class="col-50">
+      <label for="cnpj">cpf</label>
+      <input type="text" name="cpf" id="cpf" formControlName="cpf" />
+      <app-erro-form
+        [control]="formCliente.controls['cpf']"
+        [customMessages]="{
+          required: 'CPF é obrigatório',
+          pattern: 'Formato deve ser 000.000.000-00'
+        }"
+      ></app-erro-form>
+    </div>
+    
+    <div class="col-50">
+      <label for="login">login</label>
+      <input type="text" name="login" id="login" formControlName="login" />
+      <app-erro-form
+        [control]="formCliente.controls['login']"
+        [customMessages]="{
+          required: 'login é obrigatório'
+        }"
+      ></app-erro-form>
+    </div>
+
+    <div class="col-50">
+      <label for="email">Email</label>
+      <input type="text" name="email" id="email" formControlName="email" />
+      <app-erro-form
+        [control]="formCliente.controls['email']"
+        [customMessages]="{
+          required: 'Senha é obrigatório',
+          mustMatch: 'O valor deve ser igual a Confirma senha'
+        }"
+      ></app-erro-form>
+    </div>
+
+    <div class="col-50">
+      <label for="senha">Senha</label>
+      <input type="password" name="senha" id="senha" formControlName="senha" />
+      <app-erro-form
+        [control]="formCliente.controls['senha']"
+        [customMessages]="{
+          required: 'Senha é obrigatório',
+          mustMatch: 'O valor deve ser igual a Confirma senha'
+        }"
+      ></app-erro-form>
+    </div>
+  <div class="col-50">
+      <label for="confirmSenha">Confirma Senha</label>
+      <input type="password" name="confirmSenha" id="confirmSenha" formControlName="confirmSenha" />
+      <app-erro-form
+        [control]="formCliente.controls['confirmSenha']"
+        [customMessages]="{
+          required: 'Senha é obrigatório',
+          mustMatch: 'O valor deve ser igual a Confirma senha'
+        }"
+      ></app-erro-form>
+    </div>
+
+    @if(formCliente.enabled){
+    <div class="col-100">
+      <label for="documento_path">confirma senha</label>
+      <input type="file" 
+      #fileInput (change)="onFileChange($event)"  
+      accept=".pdf, .jpg"
+      />
+      <app-erro-form
+        [control]="formCliente.controls['documento_path']"
+        [customMessages]="{
+          required: 'Confirma senha é obrigatório',
+          tamanhoExcedido: 'Tamanho do arquivo execeu 2048mb',
+          tipoInvalido: 'Selecione um aruqivo PDF ou JPEG'
+        }"
+      ></app-erro-form>
+    </div>
+     <div class="col-100">
+      <label for="empresasForm">Empresas</label>
+      <ng-select
+        [items]="listaEmpresas"
+        bindLabel="nome"
+        bindValue="id"
+        labelForId="empresasForm"
+        [multiple]="true"
+        placeholder="Selecione..."
+        formControlName="empresasForm"
+      >
+      </ng-select>
+      <app-erro-form
+        [control]="formCliente.controls['empresasForm']"
+        [customMessages]="{
+          required: 'Campo obrigatório, selecione uma ou mais turmas.'
+        }"
+      ></app-erro-form>
+    </div>
+  }
+
+    <div class="col-100">
+      <label for="endereco">Endereço</label>
+      <input type="text" name="endereco" id="endereco" formControlName="endereco" />
+      <app-erro-form
+        [control]="formCliente.controls['endereco']"
+        [customMessages]="{
+          required: 'Nome completo é obrigatório'
+        }"
+      ></app-erro-form>
+    </div>
+    
+    @if(formCliente.disabled) {
+      
+
+    <fieldset>
+      <a [href]="clienteData.documento" target="_blank"> documento do cliente</a>
+    </fieldset>
+
+    <div class="col-100 painel">
+     <mat-accordion>
+      <mat-expansion-panel >
+        <mat-expansion-panel-header>
+          <mat-panel-title> Clientres </mat-panel-title>
+        </mat-expansion-panel-header>
+         <table>
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Nome </th>
+            <th>CPF</th>
+            <th>Endereço</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cliente of clienteData.empresas">
+            <td>{{ cliente.id }}</td>
+            <td>{{ cliente.nome }}</td>
+            <td>{{ cliente.cnpj }}</td>
+            <td>{{ cliente.endereco }}</td>
+            
+          </tr>
+        </tbody>
+      </table>
+      </mat-expansion-panel>
+    </mat-accordion>
+    </div>
+  }
+
+    <div class="botoes">
+      <button mat-flat-button type="submit">
+        <mat-icon>check</mat-icon>
+        {{ !idCliente ? "Salvar Cliente" : "Salvar Alterações" }}
+      </button>
+      <button
+        mat-flat-button
+        (click)="cancelar()"
+        class="bt-cancelar"
+      >
+        <mat-icon>close</mat-icon>Cancelar
+      </button>
+      
+    </div>
+  </form>
 </div>
+

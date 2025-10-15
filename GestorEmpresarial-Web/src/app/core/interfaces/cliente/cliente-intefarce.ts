@@ -4,9 +4,13 @@ export interface ClienteIntefarce {
     id:string,
     nome:string,
     login:string,
+    senha:string
+    confirmSenha:string
     cpf:string,
     email:string,
     endereco:string,
     documento:string,
+    documento_path:File,
+    empresasForm:any[]
     empresas:EmpresaIntefarce[]
 }

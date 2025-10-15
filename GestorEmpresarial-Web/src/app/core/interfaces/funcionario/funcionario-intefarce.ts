@@ -7,6 +7,7 @@ export interface FuncionarioIntefarce {
     cpf:string,
     email:string,
     endereco:string,
+    documento_path:File,
     documento:string,
     empresas:EmpresaIntefarce[]
 }

@@ -1,5 +1,47 @@
-<div class="cliente">
-  <h2>Cliente</h2>
-  
-  
-</div>
+
+  <div class="lista-clientes">
+    <div class="titulo">
+      <h2>Listagem de clientes</h2>
+      <button mat-flat-button type="button" (click)="cadastrar()">
+          Cadastrar
+        </button>
+    </div>
+    <section class="busca-clientes">
+      <div class="pesquisar">
+        <label for="pesquisar">Pesquisar cliente:</label>
+        <input type="text" id="pesquisar" name="pesquisar" placeholder="Buscar por nome ou código"
+          [(ngModel)]="textoPesquisa" />
+        <button mat-flat-button type="button" (click)="pesquisar()">
+          <mat-icon>search</mat-icon>
+          Pesquisar
+        </button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Nome </th>
+            <th>CPF</th>
+            <th>Endereço</th>
+            <th>Qtd. Empresas </th>
+            <th>Ações </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cliente of listaClientesFiltradas">
+            <td>{{ cliente.id }}</td>
+            <td>{{ cliente.nome }}</td>
+            <td>{{ cliente.cpf }}</td>
+            <td>{{ cliente.endereco }}</td>
+            <td>{{ cliente.empresas.length }}</td>
+
+            <td>
+              <button mat-flat-button type="button" (click)="verDetalhes(cliente.id)">
+                <mat-icon>more_vert</mat-icon>Ver mais
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
