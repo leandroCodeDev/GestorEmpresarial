@@ -1,5 +1,46 @@
-<div class="funcionario">
-  <h2>Funcionario</h2>
-  
-  
-</div>
+  <div class="lista-funcionarios">
+    <div class="titulo">
+      <h2>Listagem de funcionarios</h2>
+      <button mat-flat-button type="button" (click)="cadastrar()">
+          Cadastrar
+        </button>
+    </div>
+    <section class="busca-funcionarios">
+      <div class="pesquisar">
+        <label for="pesquisar">Pesquisar Funcionario:</label>
+        <input type="text" id="pesquisar" name="pesquisar" placeholder="Buscar por nome ou código"
+          [(ngModel)]="textoPesquisa" />
+        <button mat-flat-button type="button" (click)="pesquisar()">
+          <mat-icon>search</mat-icon>
+          Pesquisar
+        </button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Nome </th>
+            <th>CPF</th>
+            <th>Endereço</th>
+            <th>Qtd. Empresas </th>
+            <th>Ações </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let funcionario of listaFuncionariosFiltradas">
+            <td>{{ funcionario.id }}</td>
+            <td>{{ funcionario.nome }}</td>
+            <td>{{ funcionario.cpf }}</td>
+            <td>{{ funcionario.endereco }}</td>
+            <td>{{ funcionario.empresas.length }}</td>
+
+            <td>
+              <button mat-flat-button type="button" (click)="verDetalhes(funcionario.id)">
+                <mat-icon>more_vert</mat-icon>Ver mais
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>

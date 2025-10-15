@@ -22,15 +22,63 @@ export class FuncionarioService {
 
 
   postFuncionario(funcionario: FuncionarioIntefarce) {
-    return this.httpClient.post<any>(this.url, funcionario);
+    const formData = new FormData();
+    formData.append('nome', funcionario.nome);
+    formData.append('login', funcionario.login);
+    formData.append('senha', funcionario.senha);
+    formData.append('cpf', funcionario.cpf);
+    formData.append('email', funcionario.email);
+    formData.append('endereco', funcionario.endereco);
+    formData.append('documento', funcionario.documento_path);
+
+    funcionario.empresasForm.forEach((func: any, index: number) => {
+      formData.append(`empresas[${index}]`, func);
+    });
+    return this.httpClient.post<any>(this.url, formData);
   }
 
   putFuncionario(funcionario: FuncionarioIntefarce) {
-    return this.httpClient.put<any>(this.url + `/${funcionario.id}`, funcionario);
+    interface Empresa {
+  
+  }
+     const form: {
+    nome: string;
+    login: string;
+    senha: string;
+    cpf: string;
+    email: string;
+    endereco: string;
+    empresas: number[];
+  } = {
+    nome: '',
+    login: '',
+    senha: '',
+    cpf: '',
+    email: '',
+    endereco: '',
+    empresas: []
+  };
+    form.nome = funcionario.nome
+    form.login = funcionario.login
+    form.senha = funcionario.senha
+    form.cpf = funcionario.cpf
+    form.email = funcionario.email
+    form.endereco = funcionario.endereco
+    form.empresas = funcionario.empresasForm
+
+    
+    return this.httpClient.put<any>(this.url + `/${funcionario.id}`, form);
   }
 
-  deleteDocente(funcionario: FuncionarioIntefarce) {
-    return this.httpClient.delete<any>(this.url + `/${funcionario.id}`);
+  enviarDocumento(funcionario: FuncionarioIntefarce) {
+    const formData = new FormData();
+    formData.append('documento', funcionario.documento_path);
+    
+    return this.httpClient.post<any>(this.url + `/${funcionario.id}/documento`, formData);
+  }
+
+  deleteDocente(Funcionario: FuncionarioIntefarce) {
+    return this.httpClient.delete<any>(this.url + `/${Funcionario.id}`);
   }
 }
 

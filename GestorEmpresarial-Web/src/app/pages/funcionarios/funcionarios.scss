@@ -1,33 +1,67 @@
 @use "../../../styles.scss" as Styles;
 
-.funcionario {
-  background-color: Styles.$blue-100;
+.lista-funcionarios {
+ background-color: Styles.$blue-100;
   padding: 3.2rem;
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
   h2 {
     font-size: 3.6rem;
     margin-top: 0;
     margin-bottom: 4rem;
   }
-  h3 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    border-bottom: 2px dashed Styles.$blue-200;
-    padding-bottom: 1rem;
+  .titulo{
+    display: flex;
+    justify-content: space-between;
+  }
+  .pesquisar {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    margin-bottom: 2.4rem;
+    input {
+      border: 1px solid Styles.$blue-200;
+      border-radius: 4px;
+      padding: 1rem 1.6rem;
+      font-size: 1.6rem;
+      min-width: 35rem;
+    }
+  }
+  ul {
+    display: none;
+  }
+  table {
+    width: 100%;
+    thead {
+      background-color: Styles.$blue-200;
+      tr {
+        th {
+          padding: 0.6rem;
+          border-radius: 4px;
+        }
+      }
+    }
+    tr {
+      &:hover {
+        td {
+          background: Styles.$hover;
+        }
+      }
+      td {
+        padding: 0.6rem;
+        background: white;
+        text-align: center;
+        border-radius: 4px;
+      }
+    }
+  }
+  button{
+    color: white;
   }
 }
-
-
-@media (max-width: 600px) {
-  .home {
-    min-height: calc(100vh - 64px);
-  }
-}
-
 
 
 @media (max-width: 768px) {
-  .funcionario {
+  .lista-funcionarios {
     min-height: calc(100vh - 64px);
     padding: 2rem;
     h2 {
@@ -37,10 +71,46 @@
     h3 {
       font-size: 1.8rem;
     }
+    .pesquisar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      input {
+        width: 100%;
+        min-width: unset;
+      }
+      button {
+        width: 100%;
+      }
+    }
+
+    table {
+      display: none;
+    }
+    ul {
+      display: block;
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      border-left: 6px solid Styles.$blue-500;
+      font-weight: bold;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      li {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 1rem;
+        span {
+          font-weight: normal;
+          text-align: right;
+        }
+      }
+    }
   }
 }
 @media (max-width: 599px) {
-  .funcionario {
+  .lista-funcionarios {
     min-height: calc(100vh - 56px);
   }
 }
