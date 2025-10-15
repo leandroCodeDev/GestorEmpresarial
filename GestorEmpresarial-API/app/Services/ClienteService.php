@@ -43,7 +43,13 @@ class ClienteService
     public function atualizar(UpdateClienteRequest $request, int $id): JsonResource
     {
         $cliente = Cliente::with('empresas')->find($id);
-        $cliente->update($request->validated());
+        $cliente->nome = empty($request->input('nome'))?$cliente->nome:$request->input('nome');
+        $cliente->login = empty($request->input('login'))?$cliente->login:$request->input('login');
+        $cliente->cpf = empty($request->input('cpf'))?$cliente->cpf:$request->input('cpf');
+        $cliente->email = empty($request->input('email'))?$cliente->email:$request->input('email');
+        $cliente->senha = empty($request->input('senha'))?$cliente->senha:$request->input('senha');
+        $cliente->endereco = empty($request->input('endereco'))?$cliente->endereco:$request->input('endereco');
+        $cliente->save();
         if ($request->has('empresas')) {
             $cliente->empresas()->sync($request->input('empresas'));
         }

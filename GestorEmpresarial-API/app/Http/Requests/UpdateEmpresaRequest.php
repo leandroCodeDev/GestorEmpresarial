@@ -23,7 +23,7 @@ class UpdateEmpresaRequest extends FormRequest
     {
         return [
             'nome' => 'nullable|string',
-            'cnpj' => 'nullable|string',
+            'cnpj' => 'nullable|string|unique:empresas,cnpj,'.$this->empresa.',id',
             'endereco' => 'nullable|string',
         ];
     }

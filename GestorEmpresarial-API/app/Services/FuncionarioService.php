@@ -42,7 +42,13 @@ class FuncionarioService
     public function atualizar(UpdateFuncionarioRequest $request, int $id): JsonResource
     {
         $funcionario = Funcionario::with('empresas')->find($id);
-        $funcionario->update($request->validated());
+        $funcionario->nome = empty($request->input('nome'))?$funcionario->nome:$request->input('nome');
+        $funcionario->login = empty($request->input('login'))?$funcionario->login:$request->input('login');
+        $funcionario->cpf = empty($request->input('cpf'))?$funcionario->cpf:$request->input('cpf');
+        $funcionario->email = empty($request->input('email'))?$funcionario->email:$request->input('email');
+        $funcionario->senha = empty($request->input('senha'))?$funcionario->senha:$request->input('senha');
+        $funcionario->endereco = empty($request->input('endereco'))?$funcionario->endereco:$request->input('endereco');
+        $funcionario->save();
         if ($request->has('empresas')) {
             // sincroniza as empresas enviadas no request
             $funcionario->empresas()->sync($request->input('empresas'));

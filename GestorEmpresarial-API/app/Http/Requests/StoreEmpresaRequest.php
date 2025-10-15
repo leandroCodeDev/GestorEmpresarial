@@ -23,7 +23,7 @@ class StoreEmpresaRequest extends FormRequest
     {
         return [
             'nome' => 'required|string',
-            'cnpj' => 'required|string',
+            'cnpj' => 'required|string|ascii|unique:empresas,cnpj',
             'endereco' => 'required|string',
         ];
     }
