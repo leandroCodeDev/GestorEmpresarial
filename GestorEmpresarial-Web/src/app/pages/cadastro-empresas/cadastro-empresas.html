@@ -1,5 +1,132 @@
 <div class="empresa">
-  <h2>Cadastro Empresas</h2>
-  
-  
+  <div class="titulo">
+    <h3>{{ !idEmpresa ? "Cadastro" : "Edição" }}</h3>
+    <div class="botoes">
+      <button
+        mat-flat-button
+        type="button"
+        [disabled]="!idEmpresa"
+        (click)="habilitarEdicao()"
+        class="bt-editar"
+      >
+        <mat-icon>edit</mat-icon>
+        Editar
+      </button>
+      <button
+        mat-flat-button
+        type="button"
+        [disabled]="!idEmpresa"
+        (click)="excluirEmpresa(formEmpresa.value)"
+        class="bt-excluir"
+      >
+        <mat-icon>delete</mat-icon>
+        Excluir
+      </button>
+    </div>
+  </div>
+  <form [formGroup]="formEmpresa" (ngSubmit)="submitForm()">
+    <div class="col-50">
+      <label for="nome">Nome</label>
+      <input type="text" name="nome" id="nome" formControlName="nome" />
+      <app-erro-form
+        [control]="formEmpresa.controls['nome']"
+        [customMessages]="{
+          required: 'Nome completo é obrigatório',
+        }"
+      ></app-erro-form>
+    </div>
+    <div class="col-50">
+      <label for="cnpj">CNPJ</label>
+      <input type="text" name="cnpj" id="cnpj" formControlName="cnpj" />
+      <app-erro-form
+        [control]="formEmpresa.controls['cnpj']"
+        [customMessages]="{
+          required: 'Nome completo é obrigatório',
+          pattern: 'Formato deve ser 00.000.000./0000-00'
+        }"
+      ></app-erro-form>
+    </div>
+
+    <div class="col-100">
+      <label for="endereco">Endereço</label>
+      <input type="text" name="endereco" id="endereco" formControlName="endereco" />
+      <app-erro-form
+        [control]="formEmpresa.controls['endereco']"
+        [customMessages]="{
+          required: 'Nome completo é obrigatório'
+        }"
+      ></app-erro-form>
+    </div>
+    
+    @if(formEmpresa.disabled) {
+    <div class="col-100 painel">
+     <mat-accordion>
+      <mat-expansion-panel >
+        <mat-expansion-panel-header>
+          <mat-panel-title> Clientres </mat-panel-title>
+        </mat-expansion-panel-header>
+         <table>
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Nome </th>
+            <th>CPF</th>
+            <th>Endereço</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cliente of empresaData.clientes">
+            <td>{{ cliente.id }}</td>
+            <td>{{ cliente.cpf }}</td>
+            <td>{{ cliente.nome }}</td>
+            <td>{{ cliente.endereco }}</td>
+            
+          </tr>
+        </tbody>
+      </table>
+      </mat-expansion-panel>
+      <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+        <mat-expansion-panel-header>
+          <mat-panel-title> Funncionarios </mat-panel-title>
+        </mat-expansion-panel-header>
+         <table>
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Nome </th>
+            <th>CPF</th>
+            <th>Endereço</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let funcionario of empresaData.funcionarios">
+            <td>{{ funcionario.id }}</td>
+            <td>{{ funcionario.cpf }}</td>
+            <td>{{ funcionario.nome }}</td>
+            <td>{{ funcionario.endereco }}</td>
+            
+          </tr>
+        </tbody>
+      </table>
+      </mat-expansion-panel>
+    </mat-accordion>
+    </div>
+  }
+
+    <div class="botoes">
+      <button mat-flat-button type="submit">
+        <mat-icon>check</mat-icon>
+        {{ !idEmpresa ? "Salvar Empresa" : "Salvar Alterações" }}
+      </button>
+      <button
+        mat-flat-button
+        (click)="cancelar()"
+        class="bt-cancelar"
+      >
+        <mat-icon>close</mat-icon>Cancelar
+      </button>
+      
+    </div>
+  </form>
 </div>
+

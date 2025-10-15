@@ -1,5 +1,36 @@
 <div class="home">
-  <h2>Home</h2>
-  
+  <div class="home-container">
+  <h1 class="titulo">Gestor Empresarial</h1>
+
+  <p class="descricao">
+    O <strong>Gestor Empresarial</strong> é um sistema completo para o gerenciamento de empresas, funcionários e clientes.
+    Através de uma interface intuitiva, você pode cadastrar, editar, visualizar e excluir registros com facilidade.
+  </p>
+
+  <ul class="funcionalidades">
+    <li>  <mat-icon color="primary">domain</mat-icon> Cadastro e listagem de empresas com seus dados e vínculos.</li>
+    <li>  <mat-icon color="primary">badge</mat-icon> Gerenciamento de funcionários e seus documentos.</li>
+    <li>  <mat-icon color="primary">groups</mat-icon> Controle de clientes e associação a múltiplas empresas.</li>
+    <li>  <mat-icon color="primary">description</mat-icon> Upload de documentos de identificação em PDF ou JPG.</li>
+
+  </ul>
+
+  <div class="botoes-container">
+    <button mat-raised-button  color="primary" routerLink="/empresas">
+      <mat-icon>business</mat-icon>
+      <span class="label-button">Empresas</span>
+    </button>
+
+    <button mat-raised-button  color="accent" routerLink="/funcionarios">
+      <mat-icon>badge</mat-icon>
+      <span class="label-button">Funcionários</span>
+    </button>
+
+    <button mat-raised-button  color="warn" routerLink="/clientes">
+      <mat-icon>groups</mat-icon>
+      <span class="label-button">Clientes</span>
+    </button>
+  </div>
+</div>
   
 </div>

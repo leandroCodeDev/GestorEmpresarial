@@ -1,5 +1,49 @@
-<div class="empresa">
-  <h2>Empresas</h2>
-  
-  
-</div>
+
+  <div class="lista-empresas">
+    <div class="titulo">
+      <h2>Listagem de empresas</h2>
+      <button mat-flat-button type="button" (click)="cadastrar()">
+          Cadastrar
+        </button>
+    </div>
+    <section class="busca-empresas">
+      <div class="pesquisar">
+        <label for="pesquisar">Pesquisar empresa:</label>
+        <input type="text" id="pesquisar" name="pesquisar" placeholder="Buscar por nome ou código"
+          [(ngModel)]="textoPesquisa" />
+        <button mat-flat-button type="button" (click)="pesquisar()">
+          <mat-icon>search</mat-icon>
+          Pesquisar
+        </button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Nome </th>
+            <th>CNPJ</th>
+            <th>Endereço</th>
+            <th>Qtd. Clientes </th>
+            <th>Qtd. Funcionarios </th>
+            <th>Ações </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let empresa of listaEmpresasFiltradas">
+            <td>{{ empresa.id }}</td>
+            <td>{{ empresa.nome }}</td>
+            <td>{{ empresa.cnpj }}</td>
+            <td>{{ empresa.endereco }}</td>
+            <td>{{ empresa.clientes.length }}</td>
+            <td>{{ empresa.funcionarios.length }}</td>
+
+            <td>
+              <button mat-flat-button type="button" (click)="verDetalhes(empresa.id)">
+                <mat-icon>more_vert</mat-icon>Ver mais
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>

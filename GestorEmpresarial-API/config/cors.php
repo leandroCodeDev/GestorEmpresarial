@@ -15,20 +15,86 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    /*
+|--------------------------------------------------------------------------
+| CORS Paths
+|--------------------------------------------------------------------------
+|
+| Quais rotas devem aplicar CORS. Geralmente se limita a rotas de API.
+|
+*/
+    'paths' => explode(',', env('CORS_PATHS', 'api/*,sanctum/csrf-cookie')),
 
-    'allowed_methods' => ['*'],
+    /*
+    |--------------------------------------------------------------------------
+    | Allowed Methods
+    |--------------------------------------------------------------------------
+    |
+    | Métodos HTTP permitidos. ['*'] libera todos.
+    |
+    */
+    'allowed_methods' => explode(',', env('CORS_ALLOWED_METHODS', '*')),
 
-    'allowed_origins' => ['*'],
+    /*
+    |--------------------------------------------------------------------------
+    | Allowed Origins
+    |--------------------------------------------------------------------------
+    |
+    | Use '*' para todas as origens (sem suporte a cookies), ou defina origens específicas.
+    | Use explode(',', env('ALLOWED_ORIGINS')) para gerenciar via .env.
+    |
+    */
+    'allowed_origins' => array_map('trim', explode(',', env('ALLOWED_ORIGINS', '*'))),
 
-    'allowed_origins_patterns' => [],
+    /*
+    |--------------------------------------------------------------------------
+    | Allowed Origins Patterns
+    |--------------------------------------------------------------------------
+    |
+    | Útil para regex. Ex: ['^https://.*\.example\.com$']
+    |
+    */
+    'allowed_origins_patterns' => array_filter(explode(',', env('CORS_ALLOWED_ORIGINS_PATTERNS', ''))),
 
-    'allowed_headers' => ['*'],
+    /*
+    |--------------------------------------------------------------------------
+    | Allowed Headers
+    |--------------------------------------------------------------------------
+    |
+    | Cabeçalhos HTTP aceitos. ['*'] permite todos.
+    |
+    */
+    'allowed_headers' => explode(',', env('CORS_ALLOWED_HEADERS', '*')),
 
-    'exposed_headers' => [],
+    /*
+    |--------------------------------------------------------------------------
+    | Exposed Headers
+    |--------------------------------------------------------------------------
+    |
+    | Cabeçalhos que o browser pode acessar diretamente.
+    |
+    */
+    'exposed_headers' => array_filter(explode(',', env('CORS_EXPOSED_HEADERS', ''))),
 
-    'max_age' => 0,
+    /*
+    |--------------------------------------------------------------------------
+    | Max Age
+    |--------------------------------------------------------------------------
+    |
+    | Tempo (em segundos) que o browser pode cachear a resposta CORS (preflight).
+    |
+    */
+    'max_age' => (int) env('CORS_MAX_AGE', 0),
 
-    'supports_credentials' => false,
+    /*
+    |--------------------------------------------------------------------------
+    | Supports Credentials
+    |--------------------------------------------------------------------------
+    |
+    | Define se cookies/autenticação devem ser enviados com as requisições.
+    | Se `true`, você NÃO pode usar `allowed_origins = ['*']`.
+    |
+    */
+    'supports_credentials' => filter_var(env('CORS_SUPPORTS_CREDENTIALS', false), FILTER_VALIDATE_BOOL),
 
 ];

@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import {
   MatListItem,
-  MatListItemIcon,
   MatListItemTitle,
   MatNavList,
 } from '@angular/material/list';

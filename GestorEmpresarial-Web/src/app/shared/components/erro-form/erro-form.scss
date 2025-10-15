@@ -1,0 +1,7 @@
+@use "../../../../styles.scss" as Styles;
+
+span {
+  font-size: 1.4rem;
+  font-style: italic;
+  color: Styles.$alerta;
+}

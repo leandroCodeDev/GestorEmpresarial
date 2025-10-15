@@ -8,13 +8,44 @@ export const routes: Routes = [
   },
   {
     path: 'empresas',
-    loadComponent: () =>
-      import('./pages/empresas/empresas').then((c) => c.Empresas),
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+        import('./pages/empresas/empresas').then((c) => c.Empresas),
+      },
+      {
+        path: 'cadastro',
+        loadComponent: () =>
+        import('./pages/cadastro-empresas/cadastro-empresas').then((c) => c.CadastroEmpresas),
+      },
+      {
+        path: ':id',
+        loadComponent: () =>
+        import('./pages/cadastro-empresas/cadastro-empresas').then((c) => c.CadastroEmpresas),
+      },
+    ]
+    
   },
   {
     path: 'clientes',
-    loadComponent: () =>
-      import('./pages/clientes/clientes').then((c) => c.Clientes),
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+        import('./pages/clientes/clientes').then((c) => c.Clientes),
+      },
+      {
+        path: 'cadastro',
+        loadComponent: () =>
+        import('./pages/cadastro-clientes/cadastro-clientes').then((c) => c.CadastroClientes),
+      },
+      {
+        path: ':id',
+        loadComponent: () =>
+         import('./pages/cadastro-clientes/cadastro-clientes').then((c) => c.CadastroClientes),
+      },
+    ]
   },
   {
     path: 'funcionarios',
@@ -30,14 +61,9 @@ export const routes: Routes = [
         import('./pages/cadastro-funcionarios/cadastro-funcionarios').then((c) => c.CadastroFuncionarios),
       },
       {
-        path: ':id/visualizar',
+        path: ':id',
         loadComponent: () =>
-        import('./pages/visualizar-funcionarios/visualizar-funcionarios').then((c) => c.VisualizarFuncionarios),
-      },
-      {
-        path: ':id/editar',
-        loadComponent: () =>
-        import('./pages/editar-funcionarios/editar-funcionarios').then((c) => c.EditarFuncionarios),
+        import('./pages/cadastro-funcionarios/cadastro-funcionarios').then((c) => c.CadastroFuncionarios),
       },
     ]
   },

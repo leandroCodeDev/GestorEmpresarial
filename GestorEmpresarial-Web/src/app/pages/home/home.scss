@@ -17,6 +17,65 @@
   }
 }
 
+// Variáveis globais para consistência de estilo
+$primary-color: #1565c0;
+$text-color: #444;
+$muted-color: #555;
+
+// Container principal
+.home-container {
+  text-align: center;
+  margin: 8vh auto;
+  max-width: 800px;
+  padding: 0 1rem;
+
+  .titulo {
+    font-size: 4.3rem;
+    font-weight: 500;
+    color: $primary-color;
+    margin-bottom: 1rem;
+  }
+
+  .descricao {
+    font-size: 2.1rem;
+    color: $text-color;
+    margin-bottom: 2rem;
+  }
+
+  // Lista de funcionalidades
+  .funcionalidades {
+    list-style: none;
+    padding: 1rem;
+    margin: 0 auto 2rem;
+    text-align: left;
+    display: inline-block;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1rem 0;
+      font-size: 1.8rem;
+      color: $muted-color;
+
+      mat-icon {
+        height: 30px;
+        width: 30px;
+        margin: 0.8rem;
+        font-size: 30px;
+        color: $primary-color;
+      }
+    }
+  }
+
+  buttom{
+    border-radius: 12px
+  }
+
+}
+
+
+
 
 @media (max-width: 600px) {
   .home {
