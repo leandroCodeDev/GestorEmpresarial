@@ -20,7 +20,7 @@ class FuncionarioFactory extends Factory
         return [
             'nome' => $this->faker->name(),
             'login' => Str::ascii($this->faker->unique()->userName()),
-            'cpf' => $this->faker->unique()->numerify('####.###.###-##'),
+            'cpf' => $this->faker->unique()->numerify('###.###.###-##'),
             'email' => $this->faker->unique()->email(),
             'senha' => $this->faker->password(),
             'endereco' => $this->faker->address(),

@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  angular:
+    build:
+      context: ./   # raiz do projeto
+      dockerfile: docker/angular/Dockerfile
+    container_name: angular_app
+    ports:
+      - "4201:80"
+    networks:
+      - angular_net
+
+networks:
+  angular_net:
+    driver: bridge

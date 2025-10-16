@@ -1,0 +1,889 @@
+{
+	"info": {
+		"_postman_id": "f8483bad-f48e-4ac9-91ae-539ce92e6dcb",
+		"name": "GestorEmpresarial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6657028"
+	},
+	"item": [
+		{
+			"name": "Empresas",
+			"item": [
+				{
+					"name": "lista todas as empresas",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/empresas",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"empresas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "lista uma empresa",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Empresa Exemplo LTDA\",\n  \"cnpj\": \"12.345.678/0001-99\",\n  \"endereco\": \"Rua das Flores, 123, Bairro Central, São Paulo, SP\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/empresas/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"empresas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "alterar uma empresa",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "enctype",
+								"value": "multipart/form-data",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Empresa Exemplo LTDA\",\n  \"cnpj\": \"12.345.678/0001-99\",\n  \"endereco\": \"Rua das Flores, 123, Bairro Central, São Paulo, SP\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/empresas/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"empresas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Gera uma empresa",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Empresa Exemplo LTDA\",\n  \"cnpj\": \"12.345.678/0001-99\",\n  \"endereco\": \"Rua das Flores, 123, Bairro Central, São Paulo, SP\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/empresas",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"empresas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remover uma empresa",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/empresas/4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"empresas",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "lista todas os clientes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"// Test: Status code is 200",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Test: Response is an array of clients with expected structure",
+									"pm.test(\"Response is an array of clients with expected structure\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(Array.isArray(jsonData)).to.be.true;",
+									"    jsonData.forEach(function(client) {",
+									"        pm.expect(client).to.have.property(\"id\").that.is.a(\"number\");",
+									"        pm.expect(client).to.have.property(\"nome\").that.is.a(\"string\");",
+									"        pm.expect(client).to.have.property(\"email\").that.is.a(\"string\");",
+									"        pm.expect(client).to.have.property(\"ativo\").that.is.a(\"boolean\");",
+									"        // Add more property checks as per API contract",
+									"    });",
+									"});",
+									"",
+									"// Test: No duplicate client IDs",
+									"pm.test(\"No duplicate client IDs\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var ids = jsonData.map(c => c.id);",
+									"    var uniqueIds = new Set(ids);",
+									"    pm.expect(ids.length).to.eql(uniqueIds.size);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/clientes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "lista um cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"// Test: Status code is 200",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Test: Response is a single client object with expected structure",
+									"pm.test(\"Response is a client object with expected structure\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an(\"object\");",
+									"    pm.expect(jsonData).to.have.property(\"id\").that.is.a(\"number\");",
+									"    pm.expect(jsonData).to.have.property(\"nome\").that.is.a(\"string\");",
+									"    pm.expect(jsonData).to.have.property(\"email\").that.is.a(\"string\");",
+									"    pm.expect(jsonData).to.have.property(\"ativo\").that.is.a(\"boolean\");",
+									"    // Add more property checks as per API contract",
+									"});",
+									"",
+									"// Test: Client ID matches requested ID",
+									"pm.test(\"Client ID matches requested ID\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(1); // Adjust if path variable is used",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/clientes/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"clientes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cria um cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"// Test: Status code is 201 (Created)",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"// Test: Response is a client object with expected structure",
+									"pm.test(\"Response is a client object with expected structure\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an(\"object\");",
+									"    pm.expect(jsonData).to.have.property(\"id\").that.is.a(\"number\");",
+									"    pm.expect(jsonData).to.have.property(\"nome\").that.is.a(\"string\");",
+									"    pm.expect(jsonData).to.have.property(\"email\").that.is.a(\"string\");",
+									"    pm.expect(jsonData).to.have.property(\"ativo\").that.is.a(\"boolean\");",
+									"    // Add more property checks as per API contract",
+									"});",
+									"",
+									"// Test: Client is active by default (if business rule applies)",
+									"pm.test(\"Client is active by default\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.ativo).to.be.true;",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nome",
+									"value": " João da Silva",
+									"type": "text"
+								},
+								{
+									"key": "login",
+									"value": " joaosilva123",
+									"type": "text"
+								},
+								{
+									"key": "cpf",
+									"value": " 123.456.789-00",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": " joao.silva@email.com",
+									"type": "text"
+								},
+								{
+									"key": "senha",
+									"value": " senhaSegura123",
+									"type": "text"
+								},
+								{
+									"key": "endereco",
+									"value": " Rua das Acácias, 123, Bairro Jardim, São Paulo, SP",
+									"type": "text"
+								},
+								{
+									"key": "empresas[]",
+									"value": " 1",
+									"type": "text"
+								},
+								{
+									"key": "documento",
+									"type": "file",
+									"src": "/home/lvd/Downloads/dup (1).jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/clientes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "alterar um cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"// Test: Status code is 200 (OK)",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Test: Response is a client object with expected structure",
+									"pm.test(\"Response is a client object with expected structure\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an(\"object\");",
+									"    pm.expect(jsonData).to.have.property(\"id\").that.is.a(\"number\");",
+									"    pm.expect(jsonData).to.have.property(\"nome\").that.is.a(\"string\");",
+									"    pm.expect(jsonData).to.have.property(\"email\").that.is.a(\"string\");",
+									"    pm.expect(jsonData).to.have.property(\"ativo\").that.is.a(\"boolean\");",
+									"    // Add more property checks as per API contract",
+									"});",
+									"",
+									"// Test: Updated fields are present (if known)",
+									"pm.test(\"Updated fields are present\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    // Example: pm.expect(jsonData.nome).to.eql(\"Updated Name\");",
+									"    // Adjust as per test data",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"João da Silva\",\n  \"login\": \"joaosilva123\",\n  \"cpf\": \"123.456.789-00\",\n  \"email\": \"joao.silva@email.com\",\n  \"senha\": \"senhaSegura123\",\n  \"endereco\": \"Rua das Acácias, 123, Bairro Jardim, São Paulo, SP\",\n  \"empresas\": [1]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/clientes/10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"clientes",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "excluir cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"// Test: Status code is 204 (No Content) or 200 (OK)",
+									"pm.test(\"Status code is 204 or 200\", function () {",
+									"    pm.expect([200, 204]).to.include(pm.response.code);",
+									"});",
+									"",
+									"// Test: Response body is empty (for 204)",
+									"pm.test(\"Response body is empty for 204\", function () {",
+									"    if (pm.response.code === 204) {",
+									"        pm.expect(pm.response.text()).to.be.empty;",
+									"    }",
+									"});",
+									"",
+									"// Test: Response message for 200 (if API returns a message)",
+									"pm.test(\"Response contains success message for 200\", function () {",
+									"    if (pm.response.code === 200) {",
+									"        var jsonData = pm.response.json();",
+									"        pm.expect(jsonData).to.have.property(\"message\");",
+									"        // Optionally check message content",
+									"    }",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/clientes/15",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"clientes",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "enviar documento",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"// Test: Status code is 201 (Created) or 200 (OK)",
+									"pm.test(\"Status code is 201 or 200\", function () {",
+									"    pm.expect([200, 201]).to.include(pm.response.code);",
+									"});",
+									"",
+									"// Test: Response contains document metadata (if applicable)",
+									"pm.test(\"Response contains document metadata\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an(\"object\");",
+									"    pm.expect(jsonData).to.have.property(\"documentId\").that.is.a(\"number\");",
+									"    pm.expect(jsonData).to.have.property(\"fileName\").that.is.a(\"string\");",
+									"    pm.expect(jsonData).to.have.property(\"uploadedAt\").that.is.a(\"string\"); // ISO date string",
+									"    // Add more property checks as per API contract",
+									"});",
+									"",
+									"// Test: Document is associated with correct client",
+									"pm.test(\"Document is associated with correct client\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property(\"clientId\").that.is.a(\"number\");",
+									"    pm.expect(jsonData.clientId).to.eql(16); // Adjust if path variable is used",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "documento",
+									"type": "file",
+									"src": "/home/lvd/Downloads/SP000000718.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/clientes/16/documento",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"clientes",
+								"16",
+								"documento"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Funcionarios",
+			"item": [
+				{
+					"name": "lista todas os funcionarios",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/funcionarios",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"funcionarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "lista um funcionario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/funcionarios/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"funcionarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cria um funcionario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nome",
+									"value": " Carlos Pereira",
+									"type": "text"
+								},
+								{
+									"key": "login",
+									"value": " carlospereira",
+									"type": "text"
+								},
+								{
+									"key": "cpf",
+									"value": " 987.654.321-00",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": " carlos.pereira@email.com",
+									"type": "text"
+								},
+								{
+									"key": "senha",
+									"value": "senhaForte123",
+									"type": "text"
+								},
+								{
+									"key": "endereco",
+									"value": " Avenida das Palmeiras, 456, Bairro Centro, Rio de Janeiro, RJ",
+									"type": "text"
+								},
+								{
+									"key": "empresas[]",
+									"value": " 1",
+									"type": "text"
+								},
+								{
+									"key": "documento",
+									"type": "file",
+									"src": "/home/lvd/Downloads/SP000000718.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/funcionarios",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"funcionarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "alterar um funcionario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"nome\": \"Carlos Pereira\",\n  \"login\": \"carlospereira\",\n  \"cpf\": \"987.654.321-00\",\n  \"email\": \"carlos.pereira@email.com\",\n  \"senha\": \"senhaForte123\",\n  \"endereco\": \"Avenida das Palmeiras, 456, Bairro Centro, Rio de Janeiro, RJ\",\n  \"empresas\": [1]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/funcionarios/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"funcionarios",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "excluir funcionario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/funcionarios/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"funcionarios",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "enviar documento",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "documento",
+									"type": "file",
+									"src": "/home/lvd/Downloads/SP000000718.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/funcionarios/1/documento",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"funcionarios",
+								"1",
+								"documento"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "",
+			"type": "default"
+		}
+	]
+}

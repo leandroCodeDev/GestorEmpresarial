@@ -13,9 +13,9 @@ class EmpresaSeeder extends Seeder
     public function run(): void
     {
         Empresa::factory()
-            ->count(1)
-            ->hasClientes(2)
-            ->hasFuncionarios(2)
+            ->count(3)
+            ->hasClientes(3)
+            ->hasFuncionarios(3)
             ->create();
     }
 }
