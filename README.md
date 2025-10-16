@@ -87,8 +87,8 @@ chmod +x start-containers.sh
 
 ### 4️⃣ Acessar a aplicação
 
-* **API Laravel:** [http://localhost:8000/api](http://localhost:8000/api)
-* **Frontend Angular:** [http://localhost:4200](http://localhost:4200)
+* **API Laravel:** [http://localhost:8989/api](http://localhost:8989/api)
+* **Frontend Angular:** [http://localhost:4201](http://localhost:4201)
 
 ---
 
